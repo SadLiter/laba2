@@ -7,7 +7,7 @@ class Attacker(ABC):
 
 class Moveable(ABC):
     @abstractmethod
-    def move(self, x, y):
+    def move(self, dx, dy):
         pass
 
 class GameObject:
@@ -67,8 +67,14 @@ class Building(GameObject):
         super().__init__(obj_id, name, x, y)
         self._built = False
 
+    def build(self):
+        self._built = True
+        print(f"{self.get_name()} has been built!")
+
     def is_built(self):
         return self._built
+    
+    
 
 
 class Fort(Building, Attacker):
@@ -97,7 +103,9 @@ archer.attack(enemy_unit)
 archer.move(10, 10)
 
 fort = Fort(3, "Fort", 10, 10, 30)
+fort.build()
 fort.attack(enemy_unit)
 
 mobile_house = MobileHouse(4, "Mobile House", 2, 5)
+mobile_house.build()
 mobile_house.move(10, 10)
